@@ -73,7 +73,6 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     open func config(with viewControllers: [UIViewController], titles: [String]) {
         self.viewControllers = viewControllers
         self.titles = titles
-        self.configScrollPage()
     }
     
     

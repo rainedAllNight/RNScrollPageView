@@ -1,9 +1,9 @@
 # RNScrollPageView
-a slideable page menu / 可滑动的分页菜单
+## a slideable page menu / 可滑动的分页菜单
 
 ![效果图1](https://github.com/rainedAllNight/RNScrollPageView/blob/master/RNImageViewPlayerCustom1.gif) ![效果图2](https://github.com/rainedAllNight/RNScrollPageView/blob/master/RNImageViewPlayerCustom2.gif)
 
-#How to use
+# How to use
 
 * ###Optional Property
 

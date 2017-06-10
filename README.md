@@ -49,7 +49,7 @@
 
 **titles：** 标题数组，或者可通过**config**方法传入
 
-### Function 、
+### Function 
 
 **配置数据源**
 

@@ -5,54 +5,53 @@
 
 # How to use
 
-* Optional Property
+### Optional Property
 
-**selectedIndex：**默认选中的index, 默认为0(第一个)
+**selectedIndex：** 默认选中的index, 默认为0(第一个)
 
 **pageItemWidth：** 每个titleItem的宽度，如果不设置默认根据标题字数来适应
 
 **pageItemHeight：** titleItem的高度，默认为40.0
 
-**isHideSubLine：**是否隐藏跟随滑动的subLineView，默认为false
+**isHideSubLine：** 是否隐藏跟随滑动的subLineView，默认为false
 
-**subLineHeigh：**subLineView的高度，默认为2.0
+**subLineHeigh：** subLineView的高度，默认为2.0
 
-**subLineWidth：**subLineView的高度，如果不设置，默认等于pageItemWidth
+**subLineWidth：** subLineView的高度，如果不设置，默认等于pageItemWidth
 
-**itemTitleMargin：**两个titleItem之间的间距，默认为20.0
+**itemTitleMargin：** 两个titleItem之间的间距，默认为20.0
 
-**subLineViewColor：**subLineView的颜色，默认为red红色
+**subLineViewColor：** subLineView的颜色，默认为red红色
 
-**titleColorNormal：**标题正常状态下的颜色，默认为black黑色
+**titleColorNormal：** 标题正常状态下的颜色，默认为black黑色
 
-**titleColorNormal：**标题选中状态下的颜色，默认为red红色
+**titleColorNormal：** 标题选中状态下的颜色，默认为red红色
 
-**titleFontSizeNormal：**标题正常状态下的字体大小，默认为system-14
+**titleFontSizeNormal：** 标题正常状态下的字体大小，默认为system-14
 
-**titleFontSizeSelected：**标题选中下的字体大小，默认为system-16，如果isZoomTitle为true此值则不生效
+**titleFontSizeSelected：** 标题选中下的字体大小，默认为system-16，如果isZoomTitle为true此值则不生效
 
-**isZoomTitle：**滑动时是否缩放标题，默认为true
+**isZoomTitle：** 滑动时是否缩放标题，默认为true
 
-**maxItemScale：**缩放的最大比例，默认为1.2倍
+**maxItemScale：** 缩放的最大比例，默认为1.2倍
 
-**splitLineView：**分割线
+**splitLineView：** 分割线
 
-**splitLineViewHeight：**分割线的高度
+**splitLineViewHeight：** 分割线的高度
 
-* ###Required Property
+### Required Property
 
-**viewControllers：**控制器数组，或者可通过conifg方法传入
+**viewControllers：** 控制器数组，或者可通过conifg方法传入
 
-**titles：**标题数组，或者可通过config方法传入
+**titles：** 标题数组，或者可通过config方法传入
 
-* ###Function 、
+### Function 、
 
 **配置数据源**
-    ` open func config(with viewControllers: [UIViewController], titles: [String]) `
-
-* ###Delegate
+` open func config(with viewControllers: [UIViewController], titles: [String]) `
+ ### Delegate
 **已经显示某个viewController时调用**
-    ` @objc optional func scrollPageView(_ scrollPageView: RNScrollPageView, didShow viewController: UIViewController, at index: Int) `
+ ` @objc optional func scrollPageView(_ scrollPageView: RNScrollPageView, didShow viewController: UIViewController, at index: Int) `
 
 
 

@@ -48,10 +48,14 @@
 ### Function 、
 
 **配置数据源**
+
 ` open func config(with viewControllers: [UIViewController], titles: [String]) `
+
  ### Delegate
+ 
 **已经显示某个viewController时调用**
- ` @objc optional func scrollPageView(_ scrollPageView: RNScrollPageView, didShow viewController: UIViewController, at index: Int) `
+
+` @objc optional func scrollPageView(_ scrollPageView: RNScrollPageView, didShow viewController: UIViewController, at index: Int) `
 
 
 

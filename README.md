@@ -7,6 +7,7 @@ a slideable page menu / 可滑动的分页菜单
 
 * ###Optional Property
 **selectedIndex：**默认选中的index, 默认为0(第一个)
+
 **pageItemWidth：** 每个titleItem的宽度，如果不设置默认根据标题字数来适应
 **pageItemHeight：** titleItem的高度，默认为40.0
 **isHideSubLine：**是否隐藏跟随滑动的subLineView，默认为false

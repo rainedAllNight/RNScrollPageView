@@ -5,7 +5,7 @@
 
 # How to use
 
-* ###Optional Property
+* Optional Property
 
 **selectedIndex：**默认选中的index, 默认为0(第一个)
 

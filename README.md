@@ -45,9 +45,9 @@
 
 ### Required Property
 
-**viewControllers：** 控制器数组，或者可通过conifg方法传入
+**viewControllers：** 控制器数组，或者可通过**conifg**方法传入
 
-**titles：** 标题数组，或者可通过config方法传入
+**titles：** 标题数组，或者可通过**config**方法传入
 
 ### Function 、
 

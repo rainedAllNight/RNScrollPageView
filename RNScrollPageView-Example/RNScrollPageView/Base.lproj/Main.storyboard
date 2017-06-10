@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H0q-oA-jZt">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="aJN-f6-xZd">
+            <objects>
+                <navigationController id="H0q-oA-jZt" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c4C-2Y-cBd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Bac-ZX-tnf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uus-1d-lCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-626" y="139"/>
+        </scene>
+        <!--首页-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RNScrollPageView" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIP-Yu-zxC" customClass="RNScrollPageView" customModule="RNScrollPageView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="subLineViewColor">
+                                        <color key="value" red="0.8901960784313725" green="0.3529411764705882" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColorSelected">
+                                        <color key="value" red="0.89126098155975342" green="0.3545563817024231" blue="0.39968371391296387" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eIP-Yu-zxC" secondAttribute="bottom" id="Iag-og-NJg"/>
+                            <constraint firstItem="eIP-Yu-zxC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YTS-M0-Cax"/>
+                            <constraint firstItem="eIP-Yu-zxC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="dnD-4x-RRr"/>
+                            <constraint firstAttribute="trailing" secondItem="eIP-Yu-zxC" secondAttribute="trailing" id="oE7-HC-1dL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="首页" id="SmM-WK-cNC"/>
+                    <connections>
+                        <outlet property="pageView" destination="eIP-Yu-zxC" id="8PD-Di-w3c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="119" y="98"/>
+        </scene>
+        <!--Test Table View Controller-->
+        <scene sceneID="2aU-dk-WFQ">
+            <objects>
+                <tableViewController storyboardIdentifier="TestTableViewController" id="VCq-m2-vIT" customClass="TestTableViewController" customModule="RNScrollPageView" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="V0O-OU-Cyf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ZgG-3L-7zf">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZgG-3L-7zf" id="JBQ-qy-4Er">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HKCell" rowHeight="160" id="5e4-rF-HBq" customClass="HKCell" customModule="RNScrollPageView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="160"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5e4-rF-HBq" id="ukO-3o-kmr">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="159.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oh1-nn-Wyy">
+                                            <rect key="frame" x="0.0" y="-100" width="375" height="360"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="image"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="夏-夜空" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k7-lc-aPk">
+                                            <rect key="frame" x="161.5" y="50" width="53" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#有关于梦 /02'10''" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Y-aK-kZH">
+                                            <rect key="frame" x="133" y="86" width="109" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Oh1-nn-Wyy" secondAttribute="bottom" constant="-100" id="62m-zq-uLz"/>
+                                        <constraint firstItem="Oh1-nn-Wyy" firstAttribute="leading" secondItem="ukO-3o-kmr" secondAttribute="leading" id="7Nk-fQ-YNd"/>
+                                        <constraint firstItem="1k7-lc-aPk" firstAttribute="top" secondItem="ukO-3o-kmr" secondAttribute="top" constant="50" id="9QX-CY-QAD"/>
+                                        <constraint firstItem="Oh1-nn-Wyy" firstAttribute="top" secondItem="ukO-3o-kmr" secondAttribute="top" constant="-100" id="9np-kl-jY3"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Q8Y-aK-kZH" secondAttribute="bottom" constant="50" id="D04-Dl-5vA"/>
+                                        <constraint firstItem="Q8Y-aK-kZH" firstAttribute="centerX" secondItem="ukO-3o-kmr" secondAttribute="centerX" id="ObO-dy-eWs"/>
+                                        <constraint firstItem="1k7-lc-aPk" firstAttribute="centerX" secondItem="ukO-3o-kmr" secondAttribute="centerX" id="sQM-93-nbf"/>
+                                        <constraint firstAttribute="trailing" secondItem="Oh1-nn-Wyy" secondAttribute="trailing" id="u35-uM-S9p"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="bgImageView" destination="Oh1-nn-Wyy" id="Irr-2Y-YLm"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VCq-m2-vIT" id="3GO-MF-TEU"/>
+                            <outlet property="delegate" destination="VCq-m2-vIT" id="ogR-Au-6Y4"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yVr-uy-1cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="98"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="tBQ-3z-Dew">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" id="Q74-rE-FSL" customClass="DetailViewController" customModule="RNScrollPageView" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="E1u-hg-Kd9"/>
+                        <viewControllerLayoutGuide type="bottom" id="RKT-Pb-HHr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6zA-Lx-POb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KYo-fI-qWz">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="image"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KYo-fI-qWz" firstAttribute="leading" secondItem="6zA-Lx-POb" secondAttribute="leading" id="YkI-WD-u0u"/>
+                            <constraint firstItem="KYo-fI-qWz" firstAttribute="top" secondItem="E1u-hg-Kd9" secondAttribute="bottom" id="eco-sc-hcp"/>
+                            <constraint firstItem="RKT-Pb-HHr" firstAttribute="top" secondItem="KYo-fI-qWz" secondAttribute="bottom" id="pzg-PF-lCh"/>
+                            <constraint firstAttribute="trailing" secondItem="KYo-fI-qWz" secondAttribute="trailing" id="qhV-Fl-hMp"/>
+                        </constraints>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="imageView" destination="KYo-fI-qWz" id="Gex-ma-C53"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rRL-U9-pW3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1521" y="98"/>
+        </scene>
+    </scenes>
+</document>

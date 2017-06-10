@@ -39,6 +39,10 @@
 
 **splitLineViewHeight：** 分割线的高度
 
+#### 或者你也可以在storyBoard对这些属性进行设置
+
+![image](https://github.com/rainedAllNight/RNScrollPageView/blob/master/3EB82318-82A6-4FE3-938C-B45B9A4B057B.png)
+
 ### Required Property
 
 **viewControllers：** 控制器数组，或者可通过conifg方法传入

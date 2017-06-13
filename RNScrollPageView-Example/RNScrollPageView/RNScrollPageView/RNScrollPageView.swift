@@ -43,17 +43,18 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     @IBInspectable open var isZoomTitle: Bool = true // item's title zoom animation, default is true; if true, the titleFontSelected is does not work
     @IBInspectable open var maxItemScale: CGFloat = 1.2 // item's title max zoom scale, default is 1.2
     @IBInspectable open var splitLineViewHeight: CGFloat = 0.5 // bottom splitLine's height, default is 0.5
+    @IBInspectable open var splitLineViewColor: UIColor = UIColor.white // the bottom splitLineView's background color, default is white
+    @IBInspectable open var isHideSplit: Bool = true // is hide bottom splitLineView, default is true
     @IBInspectable open var titleFontSizeNormal: CGFloat = 14 {
         didSet {
-            self.titleFontNormal = UIFont.systemFont(ofSize: oldValue)
+            self.titleFontNormal = UIFont.systemFont(ofSize: titleFontSizeNormal)
         }
     } // titleFontSize for normal, default is system 14
     @IBInspectable open var titleFontSizeSelected: CGFloat = 16 {
         didSet {
-            self.titleFontSelected = UIFont.systemFont(ofSize: oldValue)
+            self.titleFontSelected = UIFont.systemFont(ofSize: titleFontSizeSelected)
         }
     } // item's titleFontSize for selected, default is system 16
-    
     open var titleFontNormal: UIFont = UIFont.systemFont(ofSize: 14) // item's titleFont for normal, default is system 14
     open var titleFontSelected: UIFont = UIFont.systemFont(ofSize: 16) // item's titleFont for selected, default is system 16
     
@@ -115,8 +116,8 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
             return self.titleColorNormal
         }
     }
-
-    // MARK: - private method 
+    
+    // MARK: - private method
     
     private func configScrollPage() {
         guard self.titles.count > 0 else {
@@ -137,23 +138,28 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         
         if self.collectionView == nil {
             self.addPageItemsCollectionView()
-            self.addSplitLineView()
+            if !isHideSplit {
+                self.addSplitLineView()
+            }
         }
         
         if self.scrollView == nil {
             self.addContentScrollView()
         }
         
-        // when the total itemWidth is less than pageViewWidth, itemWidth = pageViewWidth/itemCount
         self.expectedItemWidths = self.getPageItemWidths()
-        var maxWidth: CGFloat = 0
-        let widths = self.expectedItemWidths.reduce(0) { (result, width) -> CGFloat in
-            maxWidth = max(width, maxWidth)
-            return result + width
-        }
-        let compareWidth = self.bounds.width/CGFloat(self.titles.count)
-        if widths <= self.bounds.width, compareWidth >= maxWidth {
-            self.pageItemWidth = compareWidth
+        
+        // when the total itemWidth is less than pageViewWidth, itemWidth = pageViewWidth/itemCount
+        if self.pageItemWidth == 0 {
+            var maxWidth: CGFloat = 0
+            let widths = self.expectedItemWidths.reduce(0) { (result, width) -> CGFloat in
+                maxWidth = max(width, maxWidth)
+                return result + width
+            }
+            let compareWidth = self.bounds.width/CGFloat(self.titles.count)
+            if widths <= self.bounds.width, compareWidth >= maxWidth {
+                self.pageItemWidth = compareWidth
+            }
         }
         
         // set subLineView
@@ -170,22 +176,21 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         
         var centerX: CGFloat = 0
         if self.pageItemWidth != 0 {
-            centerX = pageItemWidth * CGFloat(self.selectedIndex) - pageItemWidth/2
+            centerX = pageItemWidth * CGFloat(self.selectedIndex) + pageItemWidth/2
         } else {
             for (index, width) in self.expectedItemWidths.enumerated() {
                 if index < self.selectedIndex {
-                  centerX += width
+                    centerX += width
                 } else if index == self.selectedIndex {
                     centerX += width/2
                 }
             }
         }
         
-        self.subLineView.center = CGPoint(x: centerX, y: self.pageItemHeight - subLineHeight + 1.0 + splitLineViewHeight) // 1.0 is collectionView's contentSize edgeInset
-        self.subLineView.bounds = CGRect(x: 0, y: 0, width: subLineWidth, height: subLineHeight)
+        self.subLineView.center = CGPoint(x: centerX, y: pageItemHeight - subLineHeight + 1.0 + splitLineViewHeight) // 1.0 is collectionView's contentSize edgeInset
+        self.subLineView.bounds = CGRect(x: 0, y: 0, width: subLineWidth, height: subLineHeight + 1.0 + splitLineViewHeight)
         self.subLineView.isHidden = self.isHideSubLine
         self.subLineView.backgroundColor = subLineViewColor
-        self.collectionView?.clipsToBounds = false
         self.collectionView?.addSubview(self.subLineView)
         
         self.currentSelectedIndex = self.selectedIndex
@@ -197,6 +202,9 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
             self.collectionView?.scrollToItem(at: IndexPath(item: self.selectedIndex, section: 0), at: .centeredHorizontally, animated: false)
             self.scrollView?.scrollRectToVisible(CGRect(x: self.scrollView!.bounds.width * CGFloat(self.selectedIndex), y: 0, width: self.scrollView!.bounds.width, height: self.scrollView!.bounds.width), animated: false)
         }
+        
+        // show default viewController
+        self.showSelectedViewController(self.selectedIndex)
     }
     
     private func addPageItemsCollectionView() {
@@ -220,13 +228,19 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     
     private func addSplitLineView() {
         self.splitLineView.frame = CGRect(x: 0, y: self.pageItemHeight, width: self.bounds.width, height: splitLineViewHeight)
+        self.splitLineView.backgroundColor = self.splitLineViewColor
         self.addSubview(splitLineView)
     }
     
     private func addContentScrollView() {
         let width = self.bounds.width
-        let height = self.bounds.height - self.pageItemHeight - splitLineViewHeight
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: self.pageItemHeight + splitLineViewHeight, width: width, height: height))
+        var height = self.bounds.height - self.pageItemHeight
+        var y = self.pageItemHeight
+        if !isHideSplit {
+            height = height - splitLineViewHeight
+            y = y + splitLineViewHeight
+        }
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: y, width: width, height: height))
         scrollView.delegate = self
         scrollView.contentSize = CGSize(width: (width * CGFloat(self.viewControllers.count)), height: height)
         scrollView.isPagingEnabled = true
@@ -235,9 +249,6 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         self.addSubview(scrollView)
         
         self.scrollView = scrollView
-    
-        // show default viewController
-        self.showSelectedViewController(self.selectedIndex)
     }
     
     private func updateSubLineViewPosition(_ scrollView: UIScrollView) {
@@ -311,7 +322,7 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         if progress == 0 {
             progress = 1
         }
-
+        
         //get next index
         var nextIndex = index
         if scrollView.contentOffset.x > scrollView.bounds.width * CGFloat(index) {
@@ -328,7 +339,7 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         nextCell?.titleLabel?.textColor = self.titleColorNormal.transFormColorTo(self.titleColorSelected, progress: progress)
         
         //update size or font
-
+        
         if isZoomTitle {
             let currentItemScale = maxItemScale - (maxItemScale - 1) * progress
             let nextItemScale = 1 + (maxItemScale - 1) * progress
@@ -344,7 +355,7 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         //update titleColor
         let currentCell = self.collectionView?.cellForItem(at: IndexPath(item: formIndex, section: 0)) as? PageItemCell
         currentCell?.titleLabel?.textColor = self.titleColorNormal
-       
+        
         let nextCell = self.collectionView?.cellForItem(at: IndexPath(item: toIndex, section: 0)) as? PageItemCell
         nextCell?.titleLabel?.textColor = self.titleColorSelected
         
@@ -370,7 +381,7 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     // MARK: - UICollectionViewDataSource
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.viewControllers.count
     }
@@ -402,7 +413,7 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         if self.pageItemWidth == 0 {
             return CGSize(width: self.expectedItemWidths[indexPath.item], height: pageItemHeight)
         } else {
-           return CGSize(width: self.pageItemWidth, height: pageItemHeight)
+            return CGSize(width: self.pageItemWidth, height: pageItemHeight)
         }
     }
     
@@ -422,14 +433,14 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         self.updatePageItemState(self.currentSelectedIndex, toIndex: indexPath.item)
         
         self.scrollView?.scrollRectToVisible(CGRect(x: width * CGFloat(indexPath.item), y: 0, width: width, height: height), animated: isAnimated)
-       
+        
         self.showSelectedViewController(indexPath.item)
         self.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         
         self.lastSelectedCell = collectionView.cellForItem(at: indexPath) as? PageItemCell
     }
     
-
+    
     // MARK: - UIScrollViewDelegate
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -448,7 +459,7 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
             self.currentSelectedIndex = Int(offSetX/self.bounds.width)
             self.updateSubLineViewPosition(scrollView)
             if !self.isPageItemActionScroll {
-               self.updatePageItemState(self.currentSelectedIndex, scrollView: scrollView)
+                self.updatePageItemState(self.currentSelectedIndex, scrollView: scrollView)
             }
         }
     }

@@ -38,6 +38,8 @@
 **splitLineView：** 分割线
 
 **splitLineViewHeight：** 分割线的高度
+**splitLineViewColor：** 分割线的颜色
+**isHideSplit：** 是否隐藏分割线，默认为true
 
 #### 或者你也可以在StoryBoard/Xib对这些属性进行设置
 

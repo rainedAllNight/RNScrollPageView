@@ -135,6 +135,7 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
         
         // fix cellForItem not call bug
         self.parentViewController?.automaticallyAdjustsScrollViewInsets = false
+        self.layoutIfNeeded()
         
         if self.collectionView == nil {
             self.addPageItemsCollectionView()
@@ -235,6 +236,9 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     private func addContentScrollView() {
         let width = self.bounds.width
         var height = self.bounds.height - self.pageItemHeight
+        if let _ = self.parentViewController?.navigationController {
+            height = height - 64 // hard code
+        }
         var y = self.pageItemHeight
         if !isHideSplit {
             height = height - splitLineViewHeight
@@ -297,8 +301,8 @@ class RNScrollPageView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
             return
         }
         
-        let width = self.bounds.width
-        let height = self.bounds.height - self.pageItemHeight
+        let width = self.scrollView!.bounds.width
+        let height = self.scrollView!.bounds.height
         let selectedViewController = self.viewControllers[selectedIndex]
         if !parentViewController.childViewControllers.contains(selectedViewController) {
             self.parentViewController?.addChildViewController(selectedViewController)
